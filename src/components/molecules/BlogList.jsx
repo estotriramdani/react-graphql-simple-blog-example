@@ -1,11 +1,12 @@
 import { gql } from 'graphql-request';
+import { useEffect } from 'react';
 import useQuery from '../../hooks/usePosts';
 import BlogItem from '../atoms/BlogItem';
 import BlogItemSkeleton from '../atoms/BlogItemSkeleton';
 
 const query = gql`
   query Post {
-    posts {
+    posts(orderBy: id_DESC) {
       slug
       title
       excerpt
@@ -18,6 +19,11 @@ const BlogList = () => {
     error,
     loading,
   } = useQuery({ query });
+
+  useEffect(() => {
+    document.title = "Esto's Simple Blog";
+  }, []);
+
   return (
     <>
       <h1 className="font-bold text-2xl mb-6">Esto's Simple Blog</h1>

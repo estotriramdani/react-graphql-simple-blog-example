@@ -1,4 +1,5 @@
 import { gql } from 'graphql-request';
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useQuery from '../../hooks/usePosts';
 import BlogDetailSkeleton from './BlogDetailSkeleton';
@@ -26,7 +27,11 @@ const BlogDetail = () => {
     loading,
   } = useQuery({ query: queryGenerator({ slug }) });
 
-  console.log(post);
+  useEffect(() => {
+    if (post) {
+      document.title = `${post.title} | Esto's Simple Blog`;
+    }
+  }, [post]);
 
   if (loading) {
     return <BlogDetailSkeleton />;
@@ -54,6 +59,7 @@ const BlogDetail = () => {
           <div className="flex gap-2 flex-wrap">
             {post.tags.map((tag) => (
               <Link
+                key={tag}
                 to={`/tags/${tag}`}
                 className="bg-sky-400 py-1 px-2 text-sm duration-150 hover:bg-sky-300 text-gray-50 hover:ring-2 active:ring-2 focus:ring-2 ring-offset-2 ring-sky-300 d-inline-block"
               >
