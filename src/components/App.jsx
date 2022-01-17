@@ -24,7 +24,7 @@ function App() {
             </svg>
           </Link>
         </div>
-        <div className="w-[40vw] bg-gray-100 mx-auto p-6 shadow-lg min-h-screen text-sky-800">
+        <div className="w-[95vw] md:w-[90vw] lg:w-[40vw] bg-gray-100 mx-auto p-4 lg:p-6 shadow-lg min-h-screen text-sky-800">
           <Routes>
             <Route element={<BlogList />} path="/" />
             <Route element={<BlogDetail />} path="/detail/:slug" />
